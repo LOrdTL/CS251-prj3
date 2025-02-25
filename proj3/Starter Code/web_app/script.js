@@ -9,12 +9,194 @@ var GENESIS = '0x000000000000000000000000000000000000000000000000000000000000000
 
 // This is the ABI for your contract (get it from Remix, in the 'Compile' tab)
 // ============================================================
-var abi = []; // FIXME: fill this in with your contract's ABI //Be sure to only have one array, not two
+var abi = [{
+	"anonymous": false,
+	"inputs": [
+	  {
+		"indexed": true,
+		"internalType": "address",
+		"name": "debtor",
+		"type": "address"
+	  },
+	  {
+		"indexed": true,
+		"internalType": "address",
+		"name": "creditor",
+		"type": "address"
+	  },
+	  {
+		"indexed": false,
+		"internalType": "uint32",
+		"name": "amount",
+		"type": "uint32"
+	  }
+	],
+	"name": "LogAddIOU",
+	"type": "event"
+  },
+  {
+	"anonymous": false,
+	"inputs": [
+	  {
+		"indexed": true,
+		"internalType": "address",
+		"name": "debtor",
+		"type": "address"
+	  },
+	  {
+		"indexed": true,
+		"internalType": "address",
+		"name": "creditor",
+		"type": "address"
+	  },
+	  {
+		"indexed": false,
+		"internalType": "uint32",
+		"name": "amount",
+		"type": "uint32"
+	  },
+	  {
+		"indexed": false,
+		"internalType": "bool",
+		"name": "increased",
+		"type": "bool"
+	  }
+	],
+	"name": "LogAdjustedDebt",
+	"type": "event"
+  },
+  {
+	"anonymous": false,
+	"inputs": [
+	  {
+		"indexed": true,
+		"internalType": "address",
+		"name": "debtor",
+		"type": "address"
+	  }
+	],
+	"name": "LogNewDebtor",
+	"type": "event"
+  },
+  {
+	"anonymous": false,
+	"inputs": [
+	  {
+		"indexed": false,
+		"internalType": "address[]",
+		"name": "path",
+		"type": "address[]"
+	  },
+	  {
+		"indexed": false,
+		"internalType": "uint32",
+		"name": "amount",
+		"type": "uint32"
+	  }
+	],
+	"name": "LogResolvedCycle",
+	"type": "event"
+  },
+  {
+	"inputs": [
+	  {
+		"internalType": "uint32",
+		"name": "amount",
+		"type": "uint32"
+	  },
+	  {
+		"internalType": "address",
+		"name": "creditor",
+		"type": "address"
+	  },
+	  {
+		"internalType": "bool",
+		"name": "pathFormed",
+		"type": "bool"
+	  },
+	  {
+		"internalType": "address[]",
+		"name": "path",
+		"type": "address[]"
+	  }
+	],
+	"name": "add_IOU",
+	"outputs": [],
+	"stateMutability": "nonpayable",
+	"type": "function"
+  },
+  {
+	"inputs": [
+	  {
+		"internalType": "address",
+		"name": "",
+		"type": "address"
+	  }
+	],
+	"name": "areDebtors",
+	"outputs": [
+	  {
+		"internalType": "bool",
+		"name": "",
+		"type": "bool"
+	  }
+	],
+	"stateMutability": "view",
+	"type": "function"
+  },
+  {
+	"inputs": [
+	  {
+		"internalType": "address",
+		"name": "",
+		"type": "address"
+	  },
+	  {
+		"internalType": "address",
+		"name": "",
+		"type": "address"
+	  }
+	],
+	"name": "debts",
+	"outputs": [
+	  {
+		"internalType": "uint32",
+		"name": "",
+		"type": "uint32"
+	  }
+	],
+	"stateMutability": "view",
+	"type": "function"
+  },
+  {
+	"inputs": [
+	  {
+		"internalType": "address",
+		"name": "debtor",
+		"type": "address"
+	  },
+	  {
+		"internalType": "address",
+		"name": "creditor",
+		"type": "address"
+	  }
+	],
+	"name": "lookup",
+	"outputs": [
+	  {
+		"internalType": "uint32",
+		"name": "",
+		"type": "uint32"
+	  }
+	],
+	"stateMutability": "view",
+	"type": "function"
+  }]; // FIXME: fill this in with your contract's ABI //Be sure to only have one array, not two
 // ============================================================
 abiDecoder.addABI(abi);
 // call abiDecoder.decodeMethod to use this - see 'getAllFunctionCalls' for more
 
-var contractAddress = ""; // FIXME: fill this in with your contract's address/hash
+var contractAddress = "0x7dfeb5385962cfedb397f042e53f672f69180aa3"; // FIXME: fill this in with your contract's address/hash
 
 var BlockchainSplitwise = new ethers.Contract(contractAddress, abi, provider.getSigner());
 
